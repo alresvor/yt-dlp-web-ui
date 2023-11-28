@@ -1,0 +1,5 @@
+archives:
+  - id: "yt-dlp-web-ui"
+    format_overrides:
+      - goos: windows
+        format: zip
