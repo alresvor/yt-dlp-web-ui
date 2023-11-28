@@ -102,7 +102,7 @@ func (p *Process) Start() {
 
 	// ----------------- main block ----------------- //
 	cmd := exec.Command(config.Instance().DownloaderPath, params...)
-	cmd.SysProcAttr = &syscall.SysProcAttr{Setpgid: true}
+	cmd.SysProcAttr = &syscall.SysProcAttr{}
 
 	r, err := cmd.StdoutPipe()
 	if err != nil {
@@ -191,11 +191,8 @@ func (p *Process) Kill() error {
 	// all subprocesses a SIGTERM need to be sent to the correct
 	// process group
 	if p.proc != nil {
-		pgid, err := syscall.Getpgid(p.proc.Pid)
-		if err != nil {
-			return err
-		}
-		err = syscall.Kill(-pgid, syscall.SIGTERM)
+		
+		err = p.proc.Kill()
 
 		log.Println("Killed process", p.Id)
 		return err
@@ -260,7 +257,7 @@ func (p *Process) SetPending() {
 
 func (p *Process) SetMetadata() error {
 	cmd := exec.Command(config.Instance().DownloaderPath, p.Url, "-J")
-	cmd.SysProcAttr = &syscall.SysProcAttr{Setpgid: true}
+	cmd.SysProcAttr = &syscall.SysProcAttr{}
 
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
