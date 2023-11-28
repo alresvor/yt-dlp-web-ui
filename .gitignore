@@ -10,6 +10,7 @@ downloads
 .DS_Store
 build/
 yt-dlp-webui
+frontend/
 session.dat
 config.yml
 cookies.txt
