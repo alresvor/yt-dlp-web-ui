@@ -192,7 +192,7 @@ func (p *Process) Kill() error {
 	// process group
 	if p.proc != nil {
 		
-		err = p.proc.Kill()
+		err := p.proc.Kill()
 
 		log.Println("Killed process", p.Id)
 		return err
