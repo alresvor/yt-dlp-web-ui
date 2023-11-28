@@ -22,7 +22,6 @@ jobs:
       - uses: actions/setup-go@v4
         with:
           go-version: "1.20"
-      - run: cd frontend && npm build && cd ..
       # More assembly might be required: Docker logins, GPG, etc. It all depends
       # on your needs.
       - uses: goreleaser/goreleaser-action@v4
